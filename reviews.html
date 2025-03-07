@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reviews - Spam Prevention Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <header>
+            <h1>Reviews</h1>
+            <p>All about your perspectives.</p>
+            <a href="index.html"><button>Back to Home</button></a>
+        </header>
+        
+    </header>
+
+    <main>
+        <section class="reviews">
+            <h2>What Our Users Are Saying</h2>
+
+            <div id="existing-reviews">
+                <div class="review">
+                    <h3>John Doe</h3>
+                    <p>⭐️⭐️⭐️⭐️⭐️</p>
+                    <p>"The spam prevention project has completely changed my online experience. I feel much safer now, and I can browse without worrying about spam!"</p>
+                </div>
+
+                <div class="review">
+                    <h3>Jane Smith</h3>
+                    <p>⭐️⭐️⭐️⭐️</p>
+                    <p>"I was skeptical at first, but this tool really works! I've noticed a significant decrease in spam emails since I started using it."</p>
+                </div>
+
+                <div class="review">
+                    <h3>Emily Johnson</h3>
+                    <p>⭐️⭐️⭐️⭐️⭐️</p>
+                    <p>"Fantastic project! The user interface is easy to navigate, and the spam filters are very effective. Highly recommend!"</p>
+                </div>
+            </div>
+
+            <h3>Submit Your Review</h3>
+            <textarea id="user-review" rows="4" placeholder="Write your review here..."></textarea>
+            <br>
+            <button id="submit-review">Submit Review</button>
+            <p id="message" style="color: green;"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Spam Prevention Project | All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("submit-review").addEventListener("click", function() {
+            const reviewText = document.getElementById("user-review").value.trim();
+            const message = document.getElementById("message");
+
+            if (reviewText === "") {
+                message.textContent = "Please write a review before submitting.";
+                message.style.color = "red";
+                return;
+            }
+
+            // Create a new review element
+            const newReview = document.createElement("div");
+            newReview.classList.add("review");
+            newReview.innerHTML = `<h3>You</h3><p>⭐️⭐️⭐️⭐️⭐️</p><p>"${reviewText}"</p>`;
+
+            // Append the new review to the existing reviews section
+            document.getElementById("existing-reviews").appendChild(newReview);
+
+            // Clear the textarea and show success message
+            document.getElementById("user-review").value = "";
+            message.textContent = "Thank you for your review!";
+            message.style.color = "green";
+        });
+    </script>
+</body>
+</html>

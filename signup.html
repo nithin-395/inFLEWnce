@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="signup-username">Username:</label>
+            <input type="text" id="signup-username" required>
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p id="signup-message"></p>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+
+            // Basic validation
+            if (username.length < 3 || password.length < 6) {
+                alert("Username must be at least 3 characters and password at least 6 characters.");
+                return;
+            }
+
+            // Check if users already exist in localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const existingUser  = users.find(user => user.username === username);
+
+            if (existingUser ) {
+                alert("Signup failed! Username already exists! Please choose a different one.");
+            } else {
+                // Store the new user
+                users.push({ username, password });
+                localStorage.setItem("users", JSON.stringify(users));
+                alert("Signup successful! You can now log in.");
+                // Redirect to login page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = "login.html"; // Redirect to login page
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
